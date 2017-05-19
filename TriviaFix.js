@@ -194,7 +194,7 @@ ApplicationMain.init = function() {
 	}
 };
 ApplicationMain.main = function() {
-	ApplicationMain.config = { build : "1028", company : "KpDed", file : "TriviaFix", fps : 60, name : "Trivia", orientation : "", packageName : "com.kpded.trivia", version : "0.9.1", windows : [{ antialiasing : 0, background : 0, borderless : false, depthBuffer : false, display : 0, fullscreen : false, hardware : false, height : 0, parameters : "{}", resizable : false, stencilBuffer : true, title : "Trivia", vsync : true, width : 0, x : null, y : null}]};
+	ApplicationMain.config = { build : "1029", company : "KpDed", file : "TriviaFix", fps : 60, name : "Trivia", orientation : "", packageName : "com.kpded.trivia", version : "0.9.1", windows : [{ antialiasing : 0, background : 0, borderless : false, depthBuffer : false, display : 0, fullscreen : false, hardware : false, height : 0, parameters : "{}", resizable : false, stencilBuffer : true, title : "Trivia", vsync : true, width : 0, x : null, y : null}]};
 };
 ApplicationMain.start = function() {
 	var hasMain = false;
@@ -2239,10 +2239,6 @@ var Main = function() {
 	openfl_display_Sprite.call(this);
 	var width = 800;
 	var height = 800;
-	if(flixel_FlxG.html5.onMobile) {
-		width = openfl_Lib.current.stage.stageWidth;
-		height = openfl_Lib.current.stage.stageHeight;
-	}
 	this.addChild(new flixel_FlxGame(width,height,MainMenu,1,60,60,true));
 	PlayerProfile.initialize();
 	PlayerProfile.runTimer();
@@ -7782,24 +7778,28 @@ MainMenu.prototype = $extend(flixel_FlxState.prototype,{
 	,bckMusicMenu: null
 	,create: function() {
 		flixel_FlxG.set_scaleMode(new flixel_system_scaleModes_FixedScaleMode());
+		var scaleW = 1;
+		var scaleH = 1;
 		var bg = new flixel_FlxSprite();
 		bg.loadGraphic("assets/images/background.png");
-		bg.scale.set(flixel_FlxG.width / 800,flixel_FlxG.height / 800);
+		bg.scale.set(scaleW,scaleH);
 		bg.updateHitbox();
 		this.add(bg);
 		var startButtonCover = openfl_Assets.getBitmapData("assets/images/UI/playBut.png",false);
-		this.startButton = new flixel_ui_FlxTypedButton_$flixel_$FlxSprite(flixel_FlxG.width / 2 - startButtonCover.width / 2 / 2,flixel_FlxG.height / 8 * 6,$bind(this,this.switchToPlay));
+		this.startButton = new flixel_ui_FlxTypedButton_$flixel_$FlxSprite(flixel_FlxG.width / 2 - startButtonCover.width / 2 / 2 * scaleW,flixel_FlxG.height / 8 * 6 * scaleH,$bind(this,this.switchToPlay));
 		this.startButton.loadGraphic(startButtonCover,true,380,98);
+		this.startButton.scale.set(scaleW,scaleH);
 		this.startButton.animation.add("normal",[0]);
 		this.startButton.animation.add("highlight",[0]);
 		this.startButton.animation.add("pressed",[1]);
 		this.add(this.startButton);
-		this.logo = new flixel_FlxSprite(flixel_FlxG.width / 2 - 30,flixel_FlxG.height / 2 - 40);
+		this.logo = new flixel_FlxSprite(flixel_FlxG.width / 2 - 30 * scaleW,flixel_FlxG.height / 2 - 40 * scaleH);
 		this.logo.loadGraphic("assets/images/crystal.png",true,60,147);
 		this.logo.animation.add("main",[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,0],36,true);
 		this.logo.animation.play("main");
-		this.logoJump = 80;
-		flixel_tweens_FlxTween.tween(this.logo,{ y : flixel_FlxG.height / 2 - 40 - this.logoJump},1.5,{ type : 4});
+		this.logoJump = 80 * scaleH;
+		flixel_tweens_FlxTween.tween(this.logo,{ y : flixel_FlxG.height / 2 - 40 * scaleH - this.logoJump},1.5,{ type : 4});
+		this.logo.scale.set(scaleW,scaleH);
 		this.add(this.logo);
 		this.bckMusicMenu = new flixel_system_FlxSound();
 		this.bckMusicMenu.loadEmbedded("assets/music/background_menu.ogg",true,true);
