@@ -194,7 +194,7 @@ ApplicationMain.init = function() {
 	}
 };
 ApplicationMain.main = function() {
-	ApplicationMain.config = { build : "1029", company : "KpDed", file : "TriviaFix", fps : 60, name : "Trivia", orientation : "", packageName : "com.kpded.trivia", version : "0.9.1", windows : [{ antialiasing : 0, background : 0, borderless : false, depthBuffer : false, display : 0, fullscreen : false, hardware : false, height : 0, parameters : "{}", resizable : false, stencilBuffer : true, title : "Trivia", vsync : true, width : 0, x : null, y : null}]};
+	ApplicationMain.config = { build : "1031", company : "KpDed", file : "TriviaFix", fps : 60, name : "Trivia", orientation : "", packageName : "com.kpded.trivia", version : "0.9.1", windows : [{ antialiasing : 0, background : 0, borderless : false, depthBuffer : false, display : 0, fullscreen : false, hardware : false, height : 0, parameters : "{}", resizable : false, stencilBuffer : true, title : "Trivia", vsync : true, width : 0, x : null, y : null}]};
 };
 ApplicationMain.start = function() {
 	var hasMain = false;
@@ -7778,8 +7778,8 @@ MainMenu.prototype = $extend(flixel_FlxState.prototype,{
 	,bckMusicMenu: null
 	,create: function() {
 		flixel_FlxG.set_scaleMode(new flixel_system_scaleModes_FixedScaleMode());
-		var scaleW = 1;
-		var scaleH = 1;
+		var scaleW = Math.round(flixel_FlxG.width / 800);
+		var scaleH = Math.round(flixel_FlxG.height / 800);
 		var bg = new flixel_FlxSprite();
 		bg.loadGraphic("assets/images/background.png");
 		bg.scale.set(scaleW,scaleH);
