@@ -194,7 +194,7 @@ ApplicationMain.init = function() {
 	}
 };
 ApplicationMain.main = function() {
-	ApplicationMain.config = { build : "1036", company : "KpDed", file : "TriviaFix", fps : 60, name : "Trivia", orientation : "", packageName : "com.kpded.trivia", version : "0.9.1", windows : [{ antialiasing : 0, background : 0, borderless : false, depthBuffer : false, display : 0, fullscreen : false, hardware : false, height : 0, parameters : "{}", resizable : false, stencilBuffer : true, title : "Trivia", vsync : true, width : 0, x : null, y : null}]};
+	ApplicationMain.config = { build : "1038", company : "KpDed", file : "TriviaFix", fps : 60, name : "Trivia", orientation : "", packageName : "com.kpded.trivia", version : "0.9.1", windows : [{ antialiasing : 0, background : 0, borderless : false, depthBuffer : false, display : 0, fullscreen : false, hardware : false, height : 0, parameters : "{}", resizable : false, stencilBuffer : true, title : "Trivia", vsync : true, width : 0, x : null, y : null}]};
 };
 ApplicationMain.start = function() {
 	var hasMain = false;
@@ -7431,8 +7431,8 @@ MainMenu.__super__ = flixel_FlxState;
 MainMenu.prototype = $extend(flixel_FlxState.prototype,{
 	create: function() {
 		flixel_FlxG.set_scaleMode(new flixel_system_scaleModes_FixedScaleMode());
-		var scaleW = Math.round(flixel_FlxG.width / 800);
-		var scaleH = Math.round(flixel_FlxG.height / 800);
+		var scaleW = flixel_FlxG.width / 800;
+		var scaleH = flixel_FlxG.height / 800;
 		var bg = new flixel_FlxSprite();
 		bg.loadGraphic("assets/images/background.png");
 		bg.scale.set(scaleW,scaleH);
@@ -7450,7 +7450,7 @@ MainMenu.prototype = $extend(flixel_FlxState.prototype,{
 		this.logo.loadGraphic("assets/images/crystal.png",true,60,147);
 		this.logo.animation.add("main",[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,0],36,true);
 		this.logo.animation.play("main");
-		this.logoJump = 80 * scaleH;
+		this.logoJump = Math.round(80 * scaleH);
 		flixel_tweens_FlxTween.tween(this.logo,{ y : flixel_FlxG.height / 2 - 40 * scaleH - this.logoJump},1.5,{ type : 4});
 		this.logo.scale.set(scaleW,scaleH);
 		this.add(this.logo);
