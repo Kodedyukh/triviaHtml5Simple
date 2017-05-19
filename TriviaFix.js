@@ -194,7 +194,7 @@ ApplicationMain.init = function() {
 	}
 };
 ApplicationMain.main = function() {
-	ApplicationMain.config = { build : "1038", company : "KpDed", file : "TriviaFix", fps : 60, name : "Trivia", orientation : "", packageName : "com.kpded.trivia", version : "0.9.1", windows : [{ antialiasing : 0, background : 0, borderless : false, depthBuffer : false, display : 0, fullscreen : false, hardware : false, height : 0, parameters : "{}", resizable : false, stencilBuffer : true, title : "Trivia", vsync : true, width : 0, x : null, y : null}]};
+	ApplicationMain.config = { build : "1039", company : "KpDed", file : "TriviaFix", fps : 60, name : "Trivia", orientation : "", packageName : "com.kpded.trivia", version : "0.9.1", windows : [{ antialiasing : 0, background : 0, borderless : false, depthBuffer : false, display : 0, fullscreen : false, hardware : false, height : 0, parameters : "{}", resizable : false, stencilBuffer : true, title : "Trivia", vsync : true, width : 0, x : null, y : null}]};
 };
 ApplicationMain.start = function() {
 	var hasMain = false;
@@ -7439,7 +7439,7 @@ MainMenu.prototype = $extend(flixel_FlxState.prototype,{
 		bg.updateHitbox();
 		this.add(bg);
 		var startButtonCover = openfl_Assets.getBitmapData("assets/images/UI/playBut.png",false);
-		this.startButton = new flixel_ui_FlxTypedButton_$flixel_$FlxSprite(flixel_FlxG.width / 2 - startButtonCover.width / 2 / 2 * scaleW,flixel_FlxG.height / 8 * 6 * scaleH,$bind(this,this.switchToPlay));
+		this.startButton = new flixel_ui_FlxTypedButton_$flixel_$FlxSprite(flixel_FlxG.width / 2 - startButtonCover.width / 2 / 2,flixel_FlxG.height / 8 * 6,$bind(this,this.switchToPlay));
 		this.startButton.loadGraphic(startButtonCover,true,380,98);
 		this.startButton.scale.set(scaleW,scaleH);
 		this.startButton.animation.add("normal",[0]);
@@ -7460,7 +7460,7 @@ MainMenu.prototype = $extend(flixel_FlxState.prototype,{
 		var gameName = new flixel_FlxSprite();
 		var nameBitmap = openfl_Assets.getBitmapData("assets/images/name.png");
 		gameName.loadGraphic(nameBitmap);
-		gameName.scale.set(0.5,0.5);
+		gameName.scale.set(0.5 * scaleW,0.5 * scaleH);
 		gameName.setPosition(flixel_FlxG.width / 2 - nameBitmap.width / 2,flixel_FlxG.height / 6 - nameBitmap.height / 2);
 		this.add(gameName);
 		var mobileText = new flixel_text_FlxText(flixel_FlxG.width / 2,flixel_FlxG.height / 2,200,"" + Std.string(flixel_FlxG.html5.onMobile) + scaleW + scaleH,15);
