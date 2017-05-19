@@ -194,7 +194,7 @@ ApplicationMain.init = function() {
 	}
 };
 ApplicationMain.main = function() {
-	ApplicationMain.config = { build : "1006", company : "KpDed", file : "TriviaFix", fps : 60, name : "Trivia", orientation : "", packageName : "com.kpded.trivia", version : "0.9.1", windows : [{ antialiasing : 0, background : 0, borderless : false, depthBuffer : false, display : 0, fullscreen : false, hardware : false, height : 800, parameters : "{}", resizable : false, stencilBuffer : true, title : "Trivia", vsync : true, width : 800, x : null, y : null}]};
+	ApplicationMain.config = { build : "1007", company : "KpDed", file : "TriviaFix", fps : 60, name : "Trivia", orientation : "", packageName : "com.kpded.trivia", version : "0.9.1", windows : [{ antialiasing : 0, background : 0, borderless : false, depthBuffer : false, display : 0, fullscreen : false, hardware : false, height : 800, parameters : "{}", resizable : false, stencilBuffer : true, title : "Trivia", vsync : true, width : 800, x : null, y : null}]};
 };
 ApplicationMain.start = function() {
 	var hasMain = false;
@@ -7457,6 +7457,8 @@ MainMenu.prototype = $extend(flixel_FlxState.prototype,{
 		gameName.loadGraphic(nameBitmap);
 		gameName.setPosition(flixel_FlxG.width / 2 - nameBitmap.width / 2,flixel_FlxG.height / 6);
 		this.add(gameName);
+		var mobileText = new flixel_text_FlxText(10,10,200,"" + Std.string(flixel_FlxG.html5.onMobile),15);
+		this.add(mobileText);
 		flixel_FlxState.prototype.create.call(this);
 	}
 	,update: function(elapsed) {
