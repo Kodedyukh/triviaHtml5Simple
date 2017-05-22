@@ -194,7 +194,7 @@ ApplicationMain.init = function() {
 	}
 };
 ApplicationMain.main = function() {
-	ApplicationMain.config = { build : "1055", company : "KpDed", file : "TriviaFix", fps : 60, name : "Trivia", orientation : "", packageName : "com.kpded.trivia", version : "0.9.1", windows : [{ antialiasing : 0, background : 0, borderless : false, depthBuffer : false, display : 0, fullscreen : false, hardware : false, height : 0, parameters : "{}", resizable : false, stencilBuffer : true, title : "Trivia", vsync : true, width : 0, x : null, y : null}]};
+	ApplicationMain.config = { build : "1056", company : "KpDed", file : "TriviaFix", fps : 60, name : "Trivia", orientation : "", packageName : "com.kpded.trivia", version : "0.9.1", windows : [{ antialiasing : 0, background : 0, borderless : false, depthBuffer : false, display : 0, fullscreen : false, hardware : false, height : 0, parameters : "{}", resizable : false, stencilBuffer : true, title : "Trivia", vsync : true, width : 0, x : null, y : null}]};
 };
 ApplicationMain.start = function() {
 	var hasMain = false;
@@ -7450,12 +7450,12 @@ MainMenu.prototype = $extend(flixel_FlxState.prototype,{
 		this.startButton.animation.add("highlight",[0]);
 		this.startButton.animation.add("pressed",[1]);
 		this.add(this.startButton);
-		this.logo = new flixel_FlxSprite(flixel_FlxG.width / 2 - 30 * scaleW,flixel_FlxG.height / 2 - 40 * scaleH);
+		this.logo = new flixel_FlxSprite(flixel_FlxG.width / 2 - 30,flixel_FlxG.height / 2 - 40);
 		this.logo.loadGraphic("assets/images/crystal.png",true,60,147);
 		this.logo.animation.add("main",[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,0],36,true);
 		this.logo.animation.play("main");
 		this.logoJump = Math.round(80 * scaleH);
-		flixel_tweens_FlxTween.tween(this.logo,{ y : flixel_FlxG.height / 2 - 40 * scaleH - this.logoJump},1.5,{ type : 4});
+		flixel_tweens_FlxTween.tween(this.logo,{ y : flixel_FlxG.height / 2 - 40 - this.logoJump},1.5,{ type : 4});
 		this.logo.scale.set(scaleW,scaleW);
 		this.add(this.logo);
 		this.bckMusicMenu = new flixel_system_FlxSound();
