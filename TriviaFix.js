@@ -194,7 +194,7 @@ ApplicationMain.init = function() {
 	}
 };
 ApplicationMain.main = function() {
-	ApplicationMain.config = { build : "1040", company : "KpDed", file : "TriviaFix", fps : 60, name : "Trivia", orientation : "", packageName : "com.kpded.trivia", version : "0.9.1", windows : [{ antialiasing : 0, background : 0, borderless : false, depthBuffer : false, display : 0, fullscreen : false, hardware : false, height : 0, parameters : "{}", resizable : false, stencilBuffer : true, title : "Trivia", vsync : true, width : 0, x : null, y : null}]};
+	ApplicationMain.config = { build : "1042", company : "KpDed", file : "TriviaFix", fps : 60, name : "Trivia", orientation : "", packageName : "com.kpded.trivia", version : "0.9.1", windows : [{ antialiasing : 0, background : 0, borderless : false, depthBuffer : false, display : 0, fullscreen : false, hardware : false, height : 0, parameters : "{}", resizable : false, stencilBuffer : true, title : "Trivia", vsync : true, width : 0, x : null, y : null}]};
 };
 ApplicationMain.start = function() {
 	var hasMain = false;
@@ -6690,16 +6690,20 @@ flixel_group_FlxTypedSpriteGroup.prototype = $extend(flixel_FlxSprite.prototype,
 });
 var EndMenu = function() {
 	flixel_group_FlxTypedSpriteGroup.call(this);
+	var scaleW = flixel_FlxG.width / 800;
+	var scaleH = flixel_FlxG.height / 800;
 	var oneMoreButtonCover = openfl_Assets.getBitmapData("assets/images/UI/oneMoreTimeBut.png",false);
 	this.oneMoreButton = new flixel_ui_FlxTypedButton_$flixel_$FlxSprite(flixel_FlxG.width / 2 - oneMoreButtonCover.width / 2 / 2,flixel_FlxG.height / 8 * 6,$bind(this,this.switchToPlay));
 	this.oneMoreButton.loadGraphic(oneMoreButtonCover,true,380,98);
 	this.oneMoreButton.animation.add("normal",[0]);
 	this.oneMoreButton.animation.add("highlight",[0]);
 	this.oneMoreButton.animation.add("pressed",[1]);
+	this.oneMoreButton.scale.set(scaleW,scaleW);
 	this.add(this.oneMoreButton);
 	var getMobileCover = openfl_Assets.getBitmapData("assets/images/UI/butGP.png",false);
 	this.getMButton = new flixel_ui_FlxTypedButton_$flixel_$FlxSprite(flixel_FlxG.width / 2 - getMobileCover.width / 2,720,$bind(this,this.switchToMobile));
 	this.getMButton.loadGraphic(getMobileCover,false,getMobileCover.width,getMobileCover.height);
+	this.getMButton.scale.set(scaleW,scaleW);
 	this.add(this.getMButton);
 	var otherGamesCover = openfl_Assets.getBitmapData("assets/images/UI/butOtherGames.png",false);
 	this.otherGamesButton = new flixel_ui_FlxTypedButton_$flixel_$FlxSprite(flixel_FlxG.width - otherGamesCover.width - 20,70,$bind(this,this.switchToOtherGames));
@@ -6707,6 +6711,7 @@ var EndMenu = function() {
 	this.otherGamesButton.animation.add("normal",[0]);
 	this.otherGamesButton.animation.add("highlight",[0]);
 	this.otherGamesButton.animation.add("pressed",[0]);
+	this.otherGamesButton.scale.set(scaleW,scaleW);
 	this.add(this.otherGamesButton);
 };
 $hxClasses["EndMenu"] = EndMenu;
@@ -7894,7 +7899,7 @@ PlayState.prototype = $extend(flixel_FlxState.prototype,{
 		var bgSkinWidth = bgBitData.width;
 		var bgSkinHeight = bgBitData.height;
 		this.background.loadGraphic(bgBitData);
-		this.background.scale.set(flixel_FlxG.width / bgSkinWidth,flixel_FlxG.height / bgSkinHeight);
+		this.background.scale.set(this.screenScale,this.screenScale);
 		this.background.updateHitbox();
 		this.add(this.background);
 		this.mosaic = new Mosaic(0,0,this.screenScale);
@@ -7911,6 +7916,7 @@ PlayState.prototype = $extend(flixel_FlxState.prototype,{
 		var pauseLabelCover = openfl_Assets.getBitmapData("assets/images/UI/playMenuLabel.png",false);
 		this.pauseLabel = new flixel_FlxSprite(flixel_FlxG.width / 2 - pauseLabelCover.width / 2,flixel_FlxG.height * 2 / 3 - pauseLabelCover.height / 2);
 		this.pauseLabel.loadGraphic(pauseLabelCover,false,pauseLabelCover.width,pauseLabelCover.height);
+		this.pauseLabel.scale.set(this.screenScale,this.screenScale);
 		this.add(this.pauseLabel);
 		var instruction = "Rotate triangle by moving the mouse with left button pressed \nAvoid collisions with balloons \nWhen colors of a ballon and a triangle coincide, triangle disappears \nYou get new crystal when a balloon hits screen borders or destroys a triangle \n\nGame is over when triangle hits borders";
 		this.instructionText = new flixel_text_FlxText(flixel_FlxG.width / 2 - pauseLabelCover.width / 2 + 5,flixel_FlxG.height * 2 / 3 - pauseLabelCover.height / 2 + 5,pauseLabelCover.width - 10,instruction);
@@ -7923,7 +7929,7 @@ PlayState.prototype = $extend(flixel_FlxState.prototype,{
 		instructionTextColor |= 43;
 		instructionTextColor &= 16777215;
 		instructionTextColor |= -16777216;
-		this.instructionText.setFormat("assets/advent-pro.light.ttf",30,instructionTextColor);
+		this.instructionText.setFormat("assets/advent-pro.light.ttf",Math.round(30 * this.screenScale),instructionTextColor);
 		this.add(this.instructionText);
 		this.score = 0;
 		this.scoreText = new flixel_text_FlxText(flixel_FlxG.width - 40,this.upperBorder + 20,100,"" + this.score,20);
@@ -7931,6 +7937,7 @@ PlayState.prototype = $extend(flixel_FlxState.prototype,{
 		this.add(this.scoreText);
 		var crystalSymbol = new flixel_FlxSprite(flixel_FlxG.width - 70,this.upperBorder + 20);
 		crystalSymbol.loadGraphic("assets/images/crystalSingle.png");
+		crystalSymbol.scale.set(this.screenScale,this.screenScale);
 		this.add(crystalSymbol);
 		this.bckMusicPlay = new flixel_system_FlxSound();
 		this.bckMusicPlay.loadEmbedded("assets/music/background_play.ogg",true,true);
@@ -7962,6 +7969,7 @@ PlayState.prototype = $extend(flixel_FlxState.prototype,{
 		this.nextBallPos = this.findNextBallPos();
 		this.nextBallSkin = this.findNextBallSkin();
 		this.ballSource = new BallSource(this.nextBallPos,this.nextBallSkin);
+		this.ballSource.scale.set(this.screenScale,this.screenScale);
 		this.add(this.ballSource);
 		PlayerProfile.oneMorePlay();
 		var mobileText = new flixel_text_FlxText(10,10,200,"" + Std.string(flixel_FlxG.html5.onMobile),15);
@@ -8158,6 +8166,7 @@ PlayState.prototype = $extend(flixel_FlxState.prototype,{
 		crystal.loadGraphic("assets/images/crystalSmall.png",true,20,49);
 		crystal.animation.add("main",[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,0],36,true);
 		crystal.animation.play("main");
+		crystal.scale.set(this.screenScale,this.screenScale);
 		var onTweenComplete = function(tween) {
 			crystal.kill();
 			crystal = null;
@@ -8199,6 +8208,7 @@ PlayState.prototype = $extend(flixel_FlxState.prototype,{
 		explosion.loadGraphic("assets/images/explosionSkins/" + skin + ".png",true,100,100);
 		explosion.animation.add("main",[0,1,2,3,4,5,6,7,8,9,10,11],18,false);
 		explosion.animation.play("main");
+		explosion.scale.set(this.screenScale,this.screenScale);
 		explosion.animation.finishCallback = onAnimationComplete;
 		this.add(explosion);
 	}
