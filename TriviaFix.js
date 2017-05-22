@@ -194,7 +194,7 @@ ApplicationMain.init = function() {
 	}
 };
 ApplicationMain.main = function() {
-	ApplicationMain.config = { build : "1042", company : "KpDed", file : "TriviaFix", fps : 60, name : "Trivia", orientation : "", packageName : "com.kpded.trivia", version : "0.9.1", windows : [{ antialiasing : 0, background : 0, borderless : false, depthBuffer : false, display : 0, fullscreen : false, hardware : false, height : 0, parameters : "{}", resizable : false, stencilBuffer : true, title : "Trivia", vsync : true, width : 0, x : null, y : null}]};
+	ApplicationMain.config = { build : "1044", company : "KpDed", file : "TriviaFix", fps : 60, name : "Trivia", orientation : "", packageName : "com.kpded.trivia", version : "0.9.1", windows : [{ antialiasing : 0, background : 0, borderless : false, depthBuffer : false, display : 0, fullscreen : false, hardware : false, height : 0, parameters : "{}", resizable : false, stencilBuffer : true, title : "Trivia", vsync : true, width : 0, x : null, y : null}]};
 };
 ApplicationMain.start = function() {
 	var hasMain = false;
@@ -6693,7 +6693,7 @@ var EndMenu = function() {
 	var scaleW = flixel_FlxG.width / 800;
 	var scaleH = flixel_FlxG.height / 800;
 	var oneMoreButtonCover = openfl_Assets.getBitmapData("assets/images/UI/oneMoreTimeBut.png",false);
-	this.oneMoreButton = new flixel_ui_FlxTypedButton_$flixel_$FlxSprite(flixel_FlxG.width / 2 - oneMoreButtonCover.width / 2 / 2,flixel_FlxG.height / 8 * 6,$bind(this,this.switchToPlay));
+	this.oneMoreButton = new flixel_ui_FlxTypedButton_$flixel_$FlxSprite(flixel_FlxG.width / 2 - oneMoreButtonCover.width / 2 / 2,flixel_FlxG.height * 0.75,$bind(this,this.switchToPlay));
 	this.oneMoreButton.loadGraphic(oneMoreButtonCover,true,380,98);
 	this.oneMoreButton.animation.add("normal",[0]);
 	this.oneMoreButton.animation.add("highlight",[0]);
@@ -6701,12 +6701,12 @@ var EndMenu = function() {
 	this.oneMoreButton.scale.set(scaleW,scaleW);
 	this.add(this.oneMoreButton);
 	var getMobileCover = openfl_Assets.getBitmapData("assets/images/UI/butGP.png",false);
-	this.getMButton = new flixel_ui_FlxTypedButton_$flixel_$FlxSprite(flixel_FlxG.width / 2 - getMobileCover.width / 2,720,$bind(this,this.switchToMobile));
+	this.getMButton = new flixel_ui_FlxTypedButton_$flixel_$FlxSprite(flixel_FlxG.width / 2 - getMobileCover.width / 2,flixel_FlxG.height * 0.9,$bind(this,this.switchToMobile));
 	this.getMButton.loadGraphic(getMobileCover,false,getMobileCover.width,getMobileCover.height);
 	this.getMButton.scale.set(scaleW,scaleW);
 	this.add(this.getMButton);
 	var otherGamesCover = openfl_Assets.getBitmapData("assets/images/UI/butOtherGames.png",false);
-	this.otherGamesButton = new flixel_ui_FlxTypedButton_$flixel_$FlxSprite(flixel_FlxG.width - otherGamesCover.width - 20,70,$bind(this,this.switchToOtherGames));
+	this.otherGamesButton = new flixel_ui_FlxTypedButton_$flixel_$FlxSprite(flixel_FlxG.width - otherGamesCover.width * scaleW - 20,flixel_FlxG.height * 0.1,$bind(this,this.switchToOtherGames));
 	this.otherGamesButton.loadGraphic(otherGamesCover,true,otherGamesCover.width,otherGamesCover.height);
 	this.otherGamesButton.animation.add("normal",[0]);
 	this.otherGamesButton.animation.add("highlight",[0]);
@@ -7919,7 +7919,7 @@ PlayState.prototype = $extend(flixel_FlxState.prototype,{
 		this.pauseLabel.scale.set(this.screenScale,this.screenScale);
 		this.add(this.pauseLabel);
 		var instruction = "Rotate triangle by moving the mouse with left button pressed \nAvoid collisions with balloons \nWhen colors of a ballon and a triangle coincide, triangle disappears \nYou get new crystal when a balloon hits screen borders or destroys a triangle \n\nGame is over when triangle hits borders";
-		this.instructionText = new flixel_text_FlxText(flixel_FlxG.width / 2 - pauseLabelCover.width / 2 + 5,flixel_FlxG.height * 2 / 3 - pauseLabelCover.height / 2 + 5,pauseLabelCover.width - 10,instruction);
+		this.instructionText = new flixel_text_FlxText(flixel_FlxG.width / 2 - pauseLabelCover.width * this.screenScale / 2 + 5,flixel_FlxG.height * 2 / 3 - pauseLabelCover.height * this.screenScale / 2 + 5,pauseLabelCover.width * this.screenScale - 10,instruction);
 		var instructionTextColor = flixel_util__$FlxColor_FlxColor_$Impl_$._new();
 		instructionTextColor &= -16711681;
 		instructionTextColor |= 0;
@@ -7965,6 +7965,7 @@ PlayState.prototype = $extend(flixel_FlxState.prototype,{
 		this.pauseButton.animation.add("normal",[0]);
 		this.pauseButton.animation.add("highlight",[0]);
 		this.pauseButton.animation.add("pressed",[1]);
+		this.pauseButton.scale.set(this.screenScale,this.screenScale);
 		this.add(this.pauseButton);
 		this.nextBallPos = this.findNextBallPos();
 		this.nextBallSkin = this.findNextBallSkin();
